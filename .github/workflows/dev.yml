@@ -1,18 +1,16 @@
-name: Pull Request Workflow
-
+name: Development
 on:
+  push:
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Copy files from local machine
-        run: |
-          scp -r C:\xampp\htdocs\dev stagingwp@cc1.severalnines.com:/home/stagingwp/public_html/wp-content/themes/severalnines
-        env:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+    - uses: actions/checkout@v2
+    - name: Install Dependencies
+      run: npm install
+    - name: Run Tests
+      run: npm run test
