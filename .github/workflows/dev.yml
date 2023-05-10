@@ -1,16 +1,22 @@
-name: Development
+name: Deploy to Development Environment
+
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches: [ development ]
 
+env:
+  ENVIRONMENT_NAME: Development
+  DATABASE_URL: ${{ secrets.DEVELOPMENT_DATABASE_URL }}
+  
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
+    # checkout code from repository
     - uses: actions/checkout@v2
-    - name: Install Dependencies
-      run: npm install
-    - name: Run Tests
-      run: npm run test
+
+    # build and deploy application
+    - name: Build and Deploy
+      run: |
+        # replace with your build and deployment commands
