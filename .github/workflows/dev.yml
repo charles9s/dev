@@ -48,4 +48,4 @@ jobs:
       env:
           REMOTE_URL: ${{ secrets.DEV_REPO_URL }}
           run: |
-          git push $REMOTE_URL HEAD:main
+          ls
