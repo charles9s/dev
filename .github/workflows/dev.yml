@@ -1,22 +1,22 @@
-name: Deploy to Development Environment
+name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ development ]
+    branches:
+      - main
 
-env:
-  ENVIRONMENT_NAME: Development
-  DATABASE_URL: ${{ secrets.DEVELOPMENT_DATABASE_URL }}
-  
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
+    
     steps:
-    # checkout code from repository
-    - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    # build and deploy application
-    - name: Build and Deploy
-      run: |
-        # replace with your build and deployment commands
+      # Add your build steps here
+      
+      - name: Deploy to Development
+        env:
+          REMOTE_URL: ${{ secrets.DEV_REPO_URL }}
+        run: |
+          git push $REMOTE_URL HEAD:main
